@@ -3,44 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BINGO</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div>楽しい楽しいビンゴゲーム</div>
     <div id = "number" style = "font-size: 100px;">
 
     </div>
-    <input type = "button" value = "表示" onClick = "stopNumber()">
+    <input type = "button" value = "表示" onClick = "dispNumber()">
     <div id = "history">
 
+    </div>
+    <a href="" class="" data-modal="modal">入力</a>
+    <div class="modal">
+        <div class="modal__bg" data-modal="bg"></div>
+        <div class="modal__inner" data-modal="inner">
+    
+          <!-- modal start -->
+          <div class="modal-card" data-modal="box-modal">
+            <div class="modal-card__close" data-modal="close">
+              <div class="modal-card__closeBtn"></div>
+            </div>
+    
+            <p class="modal-card__heading">追加する内容を入力してください</p>
+
+            <p class="modal-card__text"><input type="text" name="" id = "text"></p>
+            <input type="submit" class="modal-card__text" value="追加" onclick="pushList()">
+            
+          </div>
+          <!-- modal end -->
     </div>
     
 </body>
 <!--script-->
 <script>
-const numberList = ["01","02","03","04","05","06","07","08","09",10,
-                    11,12,13,14,15,16,17,18,19,20,
-                    21,22,23,24,25,26,27,28,29,30,
-                    31,32,33,34,35,36,37,38,39,40,
-                    41,42,43,44,45,46,47,48,49,50,
-                    51,52,53,54,55,56,57,58,59,60,
-                    61,62,63,64,65,66,67,68,69,70,
-                    71,72,73,74,75]
+    const modalButton = document.querySelector('[data-modal="modal"]');
+    const modalCloseBtns = document.querySelectorAll('[data-modal="close"]');
 
-function ranNumber(){
+    /* モーダルを表示 */
+    modalButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('[data-modal="bg"]').classList.add('is-active');
+        document.querySelector('[data-modal="inner"]').classList.add('is-active');
+        document.querySelector('[data-modal="box-modal"]').classList.add('is-active');
+    });
+    /* モーダルを消す動作 */
+    modalCloseBtns.forEach(modalCloseBtn => {
+        modalCloseBtn.addEventListener('click', function() {
+            document.querySelector('[data-modal="bg"]').classList.remove('is-active');
+            document.querySelector('[data-modal="inner"]').classList.remove('is-active');
+            document.querySelector('[data-modal="box-modal"]').classList.remove('is-active');
+        });
+    });
+    //ビンゴ用の配列。表示ボタン押下時にこのリストからランダムで1つ表示する。
+    const numberList = ["01","02","03","04","05","06","07","08","09",10,
+                        11,12,13,14,15,16,17,18,19,20,
+                        21,22,23,24,25,26,27,28,29,30,
+                        31,32,33,34,35,36,37,38,39,40,
+                        41,42,43,44,45,46,47,48,49,50,
+                        51,52,53,54,55,56,57,58,59,60,
+                        61,62,63,64,65,66,67,68,69,70,
+                        71,72,73,74,75]
+
+    //表示ボタン押下時処理
+    function dispNumber(){
         const number = numberList[Math.floor(Math.random()*numberList.length)]
-        document.getElementById("number").innerHTML = number
-}
-function stopNumber(){
-        const number = numberList[Math.floor(Math.random()*numberList.length)]
+        console.log(number)
         document.getElementById("number").innerHTML = number
         const history = document.getElementById("history")
         const newSpan = document.createElement("span")
         newSpan.textContent = number + "/"
         history.appendChild(newSpan)        
-}
-function clickDisp(){
-    setInternal(ranNumber)
-}
+    }
+    //入力した値をnumberListに追加
+    function pushList(){
+        const text = document.getElementById("text")
+        //入力項目がnullか空文字以外のものを追加する
+        if(text.value){
+            numberList.push(text.value)
+            console.log(text.value)
+            console.log(numberList)
+        }
+        document.getElementById("text").value = ""
+    }
 </script>
 </html>
