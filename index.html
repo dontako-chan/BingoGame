@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>どきどきBINGO!</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body onload = "createList()">
     <div class = container-fulid>
         <header class = "header navbar navbar-expand-lg bd-navbar sticky-top">
-            どきどきBINGO！
+            どきどきBINGO!
         </header>
     </div>
     <div class = "container">
@@ -22,7 +22,11 @@
             <button type="button" class="btn btn-lg btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 追加
             </button>
+            <button type="button" class="btn btn-lg btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                てやっ！
+            </button>
             <input type = "button" value = "表示" onClick = "dispNumber()" class="text-center  btn btn-lg btn-outline-info">
+            <input type = "button" value = "テスト" onClick = "test()" class="text-center  btn btn-lg btn-outline-info">
         </div>
 
         
@@ -45,12 +49,30 @@
             </div>
         </div>
         <!-- Modal終了 -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class = "text-center" style = "font-size: 200px;">32</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal終了 -->
+        
         <div class="">
             <span class="h2">これまで出た番号</span>          
         <input type="text" name="" id = "numberText" class = "">
         <button type="button" class="btn btn-outline-info" onclick="onClickei()">えい！</button>
         </div>
-        
+        <br>
         <div id = "history">
 
         </div>
@@ -64,6 +86,7 @@
 <script>
     //ビンゴ用の配列。表示ボタン押下時にこのリストからランダムで1つ表示する。
     const numberList = []
+    const drum = new Audio("sound/ドラムロールの音.mp3")
 
     function createList(){
         for(let i = 0; i<75; i++){
@@ -79,7 +102,7 @@
         document.getElementById("number").innerHTML = number
         const history = document.getElementById("history")
         const newSpan = document.createElement("span")
-        newSpan.textContent = number + "/"
+        newSpan.textContent = number
         history.appendChild(newSpan)
 
         //一度表示した値をnumberLListから削除する。
@@ -104,11 +127,14 @@
         }
             const history = document.getElementById("history")
             const newSpan = document.createElement("span")
-            newSpan.textContent = numberText.value + "/"
+            newSpan.textContent = numberText.value
             history.appendChild(newSpan)
             numberList.splice(numberList.indexOf(numberText.value),1)
             document.getElementById("numberText").value=""
             console.log(numberList)
+    }
+    function test(){
+        drum.play()
     }
 </script>
 </html>
