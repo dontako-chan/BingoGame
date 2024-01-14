@@ -1,5 +1,13 @@
+.title{
+    text-align: center;
+    animation: flash 1s linear infinite;
+}
 .number {
-    height:150px;
+    height:500px;
+    font-size: 250px;
+}
+.number span{
+    color: #6600FF;
 }
 .header{
     background-color: #6600FF;
@@ -11,4 +19,14 @@
     border: solid;
     padding: 10px;
     margin-top: 10px;
+}
+@keyframes flash {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
 }

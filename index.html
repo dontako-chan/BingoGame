@@ -14,7 +14,8 @@
         </header>
     </div>
     <div class = "container">
-        <div id = "number" style = "font-size: 100px; " class = "number text-center">
+        <div id = title class = "title h2 mt-5">なにがでるかな～＼(^o^)／</div>
+        <div id = "number" class = "number text-center">
 
         </div>
         <!-- Button trigger modal -->
@@ -22,11 +23,8 @@
             <button type="button" class="btn btn-lg btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 追加
             </button>
-            <button type="button" class="btn btn-lg btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick = "test()">
-                てやっ！
-            </button>
             <input type = "button" value = "表示" onClick = "dispNumber()" class="text-center  btn btn-lg btn-outline-info">
-            <input type = "button" value = "テスト" onClick = "test()" class="text-center  btn btn-lg btn-outline-info" id = "test">
+            <input type = "button" value = "とりゃ！" onClick = "lottery()" class="text-center  btn btn-lg btn-outline-info" id = "test">
         </div>
 
         
@@ -49,25 +47,6 @@
             </div>
         </div>
         <!-- Modal終了 -->
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class = "text-center" style = "font-size: 120px;" id = "result"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="result()" >確定</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal終了 -->
-        
         <div class="">
             <span class="h2">これまで出た番号</span>          
         <input type="text" name="" id = "numberText" class = "">
@@ -87,15 +66,18 @@
 <script>
     //ビンゴ用の配列。表示ボタン押下時にこのリストからランダムで1つ表示する。
     const numberList = []
+    var lotteryList = []
     const drum = new Audio("sound/ドラムロールの音.mp3")
     let tomare;
-    let flag = true
     let isEdit = false
+    let resultNumber;
 
     function createList(){
         for(let i = 0; i<75; i++){
         numberList.push(String(i+1))
-        }   
+        }
+        lotteryList = numberList.concat()
+        console.log(lotteryList)   
     }
 
     //表示ボタン押下時処理
@@ -140,7 +122,7 @@
     function test(){
         drum.play()
         if(flag === true){
-            tomare = setInterval(randomNumber,10)
+            tomare = setInterval(randomNumber)
             flag = false
         }else{
             clearInterval(tomare)
@@ -148,24 +130,40 @@
         }
         
     }
+    function lottery(){
+        drum.play()
+        tomare = setInterval(randomNumber2)
+        setTimeout(result,3000)
+    }
+
+
+
     function randomNumber(){
-        const number = numberList[Math.floor(Math.random()*numberList.length)]
+        const number = lotteryList[Math.floor(Math.random()*numberList.length)]
         document.getElementById("result").innerHTML = number
+    }
+
+    function randomNumber2(){
+        const number = lotteryList[Math.floor(Math.random()*numberList.length)]
+        resultNumber = numberList[Math.floor(Math.random()*numberList.length)]
+        document.getElementById("number").innerHTML = number
     }
     
     function result(){
         clearInterval(tomare)
-        flag = true
-        const number = document.getElementById("result").innerHTML
+        document.getElementById("number").innerHTML = resultNumber
+        const number = resultNumber
         const history = document.getElementById("history")
         const newSpan = document.createElement("span")
         newSpan.textContent = number
         history.appendChild(newSpan)
 
-        //一度表示した値をnumberLListから削除する。
+        //一度表示した値をnumberListから削除する。
         numberList.splice(numberList.indexOf(number),1)
         console.log(numberList)
     }
+
+    
 
 
 </script>
