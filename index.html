@@ -15,7 +15,7 @@
     </div>
     <div class = "container">
         <div id = title class = "title h2 mt-5">なにがでるかな～＼(^o^)／</div>
-        <div id = "number" class = "number pl-5">
+        <div id = "number" class = "number">
 
         </div>
         <!-- Button trigger modal -->
@@ -24,7 +24,9 @@
                 追加
             </button>
             <input type = "button" value = "表示" onClick = "dispNumber()" class="text-center  btn btn-lg btn-outline-info">
-            <input type = "button" value = "とりゃ！" onClick = "lottery()" class="text-center  btn btn-lg btn-outline-info" id = "test">
+            <input type = "button" value = "とりゃ！" onClick = "lottery()" class="text-center  btn btn-lg btn-outline-info">
+            <input type="text" name="" id = "numberText" class = "">
+            <button type="button" class="btn btn-outline-info" onclick="onClickei()">えい！</button>
         </div>
 
         
@@ -48,14 +50,12 @@
         </div>
         <!-- Modal終了 -->
         <div class="">
-            <span class="h2">これまで出た番号</span>          
-        <input type="text" name="" id = "numberText" class = "">
-        <button type="button" class="btn btn-outline-info" onclick="onClickei()">えい！</button>
+            <span class="h1">これまで出た番号</span>          
         </div>
         <br>
-        <div id = "history">
+        <ul id = "history" class = "history">
 
-        </div>
+        </ul>
     </div>
 
 
@@ -74,9 +74,10 @@
 
     function createList(){
         for(let i = 0; i<75; i++){
-        numberList.push(String(i+1))
+        numberList.push(i+1)
+        lotteryList.push(i+1)
         }
-        lotteryList = numberList.concat()
+        console.log(numberList)
         console.log(lotteryList)   
     }
 
@@ -101,7 +102,9 @@
         //入力項目がnullか空文字以外のものを追加する
         if(text.value){
             numberList.push(text.value)
+            console.log(isString(numberList[numberList.length-1]))
             console.log(numberList)
+            console.log(lotteryList) 
         }
         document.getElementById("text").value = ""
     }
@@ -111,40 +114,24 @@
         if(numberText.value === ""){
             return
         }
+        console.log(numberText)
             const history = document.getElementById("history")
-            const newSpan = document.createElement("span")
-            newSpan.textContent = numberText.value
-            history.appendChild(newSpan)
+            const li = document.createElement("li")
+            li.innerHTML = numberText.value
+            history.appendChild(li)
             numberList.splice(numberList.indexOf(numberText.value),1)
             document.getElementById("numberText").value=""
             console.log(numberList)
     }
-    function test(){
-        drum.play()
-        if(flag === true){
-            tomare = setInterval(randomNumber)
-            flag = false
-        }else{
-            clearInterval(tomare)
-            flag = true
-        }
-        
-    }
+
     function lottery(){
         drum.play()
         tomare = setInterval(randomNumber2)
         setTimeout(result,3000)
     }
 
-
-
-    function randomNumber(){
-        const number = lotteryList[Math.floor(Math.random()*numberList.length)]
-        document.getElementById("result").innerHTML = number
-    }
-
     function randomNumber2(){
-        const number = lotteryList[Math.floor(Math.random()*numberList.length)]
+        const number = lotteryList[Math.floor(Math.random()*lotteryList.length)]
         resultNumber = numberList[Math.floor(Math.random()*numberList.length)]
         document.getElementById("number").innerHTML = number
     }
@@ -153,14 +140,33 @@
         clearInterval(tomare)
         document.getElementById("number").innerHTML = resultNumber
         const number = resultNumber
-        const history = document.getElementById("history")
-        const newSpan = document.createElement("span")
-        newSpan.textContent = number
-        history.appendChild(newSpan)
+        if(!isString(number)){
+            const history = document.getElementById("history")
+            const li = document.createElement("li")
+            li.innerHTML = number
+            history.appendChild(li)
+            // const newSpan = document.createElement("span")
+            // newSpan.textContent = number
+            // history.appendChild(newSpan)
 
-        //一度表示した値をnumberListから削除する。
-        numberList.splice(numberList.indexOf(number),1)
-        console.log(numberList)
+            //一度表示した値をnumberListから削除する。
+            numberList.splice(numberList.indexOf(number),1)
+            console.log(numberList)
+        }
+
+    }
+    //String型かどうか判定
+    function isString(value) {
+        if (typeof value === "string" || value instanceof String) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function pushTable(){
+        const history = document.getElementById("history")
+        console.log(history)
     }
 
     
