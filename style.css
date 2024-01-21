@@ -1,18 +1,22 @@
+#body{
+    background-color: #f0f0f0;
+    z-index: -1;
+}
 .title{
     text-align: center;
     animation: flash 1s linear infinite;
 }
 .number {
-    height:500px;
-    width: 500px;
-    font-size: 250px;
-    border:solid;
-    border-radius:50%;
+    height:400px;
+    font-size: 200px;
     margin:0 auto;
+    border-radius: 30px;
     padding-top: 30px;
     text-align: center;
     justify-content: center;
     vertical-align: middle;
+    z-index: 1;
+    background-color: #fff;
     
 }
 .number span{
@@ -31,18 +35,22 @@
     justify-content: flex-start;
     margin: 0 auto;
     list-style: none;
-    width: 80%;
+    width: 75%;
     padding: 0;
+    background-color: #fff;
 }
 
  .history li{
     background-color: #6600FF;
+    font-size: 50px;
     color: #fff;
     border-radius: 10px;
-    height: 40px;
+    height: 100px;
     margin: 4px ;
-    width: 40px;
+    width:100px;
     text-align: center;
+    padding-top: 10px;
+    
  }
 #history span{
     font-size: large;
