@@ -9,16 +9,16 @@
 </head>
 <body onload = "createList()" id = "body">
     <div class = container-fulid>
-        <header class = "header navbar navbar-expand-lg bd-navbar sticky-top">
+        <header class = "header navbar navbar-expand-lg bd-navbar sticky-top shadow">
             どきどきBINGO!
         </header>
     </div>
     <div class = "container">
         <div id = title class = "title h2 mt-5">なにがでるかな～＼(^o^)／</div>
-        <div id = "number" class = "number w-75">
+        <div id = "number" class = "number w-75 shadow">
         </div>
         <!-- Button trigger modal -->
-        <div class="text-center">
+        <div class="text-center mt-5">
             <button type="button" class="btn btn-lg btn-primary text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 追加
             </button>
@@ -51,7 +51,7 @@
             <span class="h1">これまで出た番号</span>          
         </div>
         <br>
-        <ul id = "history" class = "history">
+        <ul id = "history" class = "history shadow">
 
         </ul>
     </div>
@@ -130,9 +130,8 @@
             //一度表示した値をnumberListから削除する。
             numberList.splice(numberList.indexOf(number),1)
             console.log(numberList)
-            document.getElementById("lottery").disabled = false
         }
-
+        document.getElementById("lottery").disabled = false
     }
     //String型かどうか判定
     function isString(value) {
