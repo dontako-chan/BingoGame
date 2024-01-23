@@ -1,3 +1,13 @@
+.navbar{
+    background-color: #674598;
+}
+.offcanvas-header{
+    background-color: #674598;
+}
+.offcanvas-body{
+    background-color: #f0f0f0;
+}
+
 #body{
     background-color: #f0f0f0;
     z-index: -1;
@@ -28,7 +38,6 @@
 }
 
 .history{
-    color: #6600FF;
 
     display: flex;
     flex-wrap: wrap;
@@ -42,7 +51,7 @@
 }
 
  .history li{
-    background-color: #6600FF;
+    background-color: #674598;
     font-size: 50px;
     color: #fff;
     border-radius: 10px;
@@ -53,14 +62,10 @@
     padding-top: 10px;
     
  }
-#history span{
-    font-size: large;
-    color: #6600FF;
-    border: solid;
-    padding: 10px;
-    margin-top: 10px;
 
-}
+ .btn-outline-info{
+    color: purple;
+ }
 @keyframes flash {
 	0%,
 	100% {
