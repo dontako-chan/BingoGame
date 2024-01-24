@@ -11,7 +11,7 @@
     <!-- サイドバー -->
     <nav class="navbar navbar-dark  mb-3 shadow">
         <div class="container-fluid">
-          <a class="navbar-brand">どきどきBINGO!</a>
+          <a class="navbar-brand tako" style = "transform: skewX(-15deg);"><img src = "image/icon_110820.svg" style = "height: 30px;">𝓣áko Øriginál</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -32,6 +32,7 @@
                 </li>
                 <li class="nav-item">
                     <input type = "button" value = "最初だけ" onClick = "lottery()" class="text-center  btn btn-lg " id = "lottery" data-bs-dismiss="offcanvas" class="btn btn-outline-info" style = "color: #674598; border-color: #674598;" onmouseOver="this.style.background='#200020'" onmouseout="this.style.background='#f0f0f0'">
+                    <input type = "button" value = "中身を見る用" onClick = "watchList()" class="text-center  btn btn-lg " id = "lottery" class="btn btn-outline-info" style = "color: #674598; border-color: #674598;" onmouseOver="this.style.background='#200020'" onmouseout="this.style.background='#f0f0f0'">
                 </li>
               </ul>
             </div>
@@ -40,13 +41,15 @@
       </nav>
       <!-- サイドバー終了 -->
     <div class = "container ">
+        <div class = "text-center mb-3">
+            <span class = "h2 bingo" style = "color: #9E76B4;">\BINGO GAME/</span>
+        </div>
         <div id = "number" class = "number w-75 shadow">
+
         </div>
         <!-- Button -->
-        <div class="text-center mt-5">
-            <button type="button" class = "btn btn-outline-info" style = "color: #674598; border-color: #674598;" onmouseOver="this.style.background='#200020'" onmouseout="this.style.background='#f0f0f0'" onclick="test1()" >効果音1</button>
-            <button type="button" class = "btn btn-outline-info" style = "color: #674598; border-color: #674598;" onmouseOver="this.style.background='#200020'" onmouseout="this.style.background='#f0f0f0'" onclick="test2()">効果音2</button>
-            <button type="button" class = "btn btn-outline-info" style = "color: #674598; border-color: #674598;" onmouseOver="this.style.background='#200020'" onmouseout="this.style.background='#f0f0f0'" onclick="test3()">効果音3</button>
+        <div class="text-center mt-3">
+            <button type="button" class = "btn btn-outline-info" style = "color: #674598; border-color: #674598;" onmouseOver="this.style.background='#200020'" onmouseout="this.style.background='#f0f0f0'" onclick="shortLottery()" >抽選！</button>
         </div>
 
         <div class="">
@@ -68,9 +71,7 @@
     const numberList = []
     var lotteryList = []
     const drum = new Audio("sound/ドラムロールの音.mp3")
-    const drum1 = new Audio("sound/snare01.mp3")
-    const drum2 = new Audio("sound/snare02.mp3")
-    const drum3 = new Audio("sound/snare03.mp3")
+    const lotterySound = new Audio("sound/ジャン！.mp3")
     let tomare;
     let resultNumber;
 
@@ -87,10 +88,7 @@
         const text = document.getElementById("text")
         //入力項目がnullか空文字以外のものを追加する
         if(text.value){
-            numberList.push(text.value)
-            console.log(isString(numberList[numberList.length-1]))
-            console.log(numberList)
-            console.log(lotteryList) 
+            numberList.push(text.value) 
         }
         document.getElementById("text").value = ""
     }
@@ -100,24 +98,22 @@
         if(numberText.value === ""){
             return
         }
-        console.log(numberText)
             const history = document.getElementById("history")
             const li = document.createElement("li")
             li.innerHTML = numberText.value
             history.appendChild(li)
             numberList.splice(numberList.indexOf(numberText.value),1)
             document.getElementById("numberText").value=""
-            console.log(numberList)
     }
 
     function lottery(){
         drum.play()
         document.getElementById("lottery").disabled = true
-        tomare = setInterval(randomNumber2)
+        tomare = setInterval(randomNumber)
         setTimeout(result,3000)
     }
 
-    function randomNumber2(){
+    function randomNumber(){
         const number = lotteryList[Math.floor(Math.random()*lotteryList.length)]
         resultNumber = numberList[Math.floor(Math.random()*numberList.length)]
         document.getElementById("number").innerHTML = number
@@ -139,7 +135,6 @@
             //一度表示した値をnumberListから削除する。
         }
         numberList.splice(numberList.indexOf(number),1)
-        console.log(numberList)
         document.getElementById("lottery").disabled = false
     }
     //String型かどうか判定
@@ -153,23 +148,16 @@
 
     function pushTable(){
         const history = document.getElementById("history")
-        console.log(history)
     }
 
-    function test1(){
-        drum1.play()
+    function shortLottery(){
+        lotterySound.play()
         resultNumber = numberList[Math.floor(Math.random()*numberList.length)]
         result()
     }
-    function test2(){
-        drum2.play()
-        resultNumber = numberList[Math.floor(Math.random()*numberList.length)]
-        result()
-    }
-    function test3(){
-        drum3.play()
-        resultNumber = numberList[Math.floor(Math.random()*numberList.length)]
-        result()
+
+    function watchList(){
+        console.log(numberList)
     }
 
     
